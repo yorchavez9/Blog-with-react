@@ -9,9 +9,11 @@ import {
   FaXmark,
 } from "react-icons/fa6";
 import { useState } from "react";
+import Modal from "./Modal";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -25,6 +27,17 @@ const Navbar = () => {
     { path: "/blogs", link: "Blogs" },
     { path: "/contact", link: "Contact" },
   ];
+
+  //Modal details
+
+  const openModal = () =>{
+    setIsModalOpen(true);
+  }
+
+  const closeModal = () =>{
+    setIsModalOpen(false);
+  }
+
 
   return (
     <header className="bg-black  text-white fixed top-0 left-0 right-0">
@@ -60,10 +73,13 @@ const Navbar = () => {
           <a href="/" className="hover:text-orange-500">
             <FaTwitter />
           </a>
-          <button className="bg-orange-500 px-6 py-2 font-medium rounded hover:bg-white hover:text-orange-500 transition-all duration-200 ease-in">
+          <button onClick={openModal} className="bg-orange-500 px-6 py-2 font-medium rounded hover:bg-white hover:text-orange-500 transition-all duration-200 ease-in">
             Login
           </button>
         </div>
+
+        {/* Our modal components */}
+        <Modal isOpen = {isModalOpen} onClose = {closeModal}/>
 
         {/* movile menu btn, display mobile screen */}
         <div className="bg-black text-white md:hidden">
